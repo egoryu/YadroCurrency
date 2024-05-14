@@ -41,17 +41,22 @@ export const currencyReducer = createReducer(
   on(updateCurrencies, (state, { currencies }) => currencies),
   on(updateCurrencySelected, (state, { symbol, selected }) => {
     return state.map(currency =>
-      currency.symbol === symbol? {...currency, selected } : currency
+      currency.symbol === symbol ? {...currency, selected } : currency
     );
   }),
     on(loadCurrenciesSucceeded, (state, { quotes }) => {
-      const newCurrencies = Object.entries(quotes).map(([symbol, rate]) => ({
-        symbol,
-        rate,
-        change: 0, // Изначально устанавливаем change в 0, затем можно будет его рассчитать
-        selected: false
-      }));
+      const newCurrencies: Currency[] = Object.entries(quotes).map(([symbol, rate]) => {
+        const currentCurrency = state.find(currency => currency.symbol === symbol.slice(3));
+        const change = currentCurrency ? currentCurrency.rate - 1 / rate : 0.0;
+        const selected = currentCurrency ? currentCurrency.selected : false;
 
-      return {...state, currencies: newCurrencies };
+        return {
+          symbol: symbol.slice(3),
+          rate: 1 / rate,
+          change,
+          selected
+        }
+      });
+      return newCurrencies;
     })
 );

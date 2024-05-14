@@ -12,7 +12,7 @@ export class CurrencyEffects {
       ofType(loadCurrenciesRequested),
       switchMap(() =>
         this.currencyService.getRates().pipe(
-          map(currencies => loadCurrenciesSucceeded({ currencies })),
+          map(quotes => loadCurrenciesSucceeded({ quotes })),
           catchError(error => of(loadCurrenciesFailed({ error })))
         )
       )

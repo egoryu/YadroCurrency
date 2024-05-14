@@ -1,0 +1,6 @@
+<ng-container *ngIf="currencies$ | async as data">
+  <div class="p-inputgroup">
+    <p-dropdown [options]="data" [(ngModel)]="selectedCurrency" optionLabel="name"  optionValue="value" placeholder="Выберите валюту"></p-dropdown>
+    <button pButton type="button" label="Добавить" (click)="addCurrency(selectedCurrency)"></button>
+  </div>
+</ng-container>
