@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable, of, tap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {ApiResponse} from "../../models/currency.model";
 
 @Injectable({
@@ -13,11 +13,10 @@ export class CurrencyService {
   constructor(private http: HttpClient) {}
 
   getRates(): Observable<{ [key: string]: number }> {
-    /*return this.http.get<ApiResponse>(this.apiUrl, { headers: { 'apikey': this.apiKey } })
+    return this.http.get<ApiResponse>(this.apiUrl, { headers: { 'apikey': this.apiKey } })
       .pipe(
-        tap(value => console.log(value)),
-        map(response => response.quotes));*/
-    return of({
+        map(response => response?.quotes));
+    /*return of({
       "quotes": {
         "RUBCNY": 0.078935,
         "RUBEUR": 0.010114,
@@ -30,9 +29,7 @@ export class CurrencyService {
       "success": true,
       "timestamp": 1715623265
     }).pipe(
-      map(response => response.quotes),
-      tap(value => console.log("kek1")),
-      tap(value => console.log(value)),);
+      map(response => response.quotes));*/
   }
 }
 

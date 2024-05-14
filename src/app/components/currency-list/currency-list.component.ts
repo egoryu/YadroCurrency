@@ -1,10 +1,9 @@
 import {Store} from '@ngrx/store';
-import {map, Observable, tap} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {AppState} from "../../store/state/app.state";
 import {Currency} from "../../models/currency.model";
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {selectCurrencies} from "../../store/selectors/currency.selector";
-import {loadCurrenciesRequested} from "../../store/actions/currency.action";
 
 
 @Component({
@@ -12,18 +11,24 @@ import {loadCurrenciesRequested} from "../../store/actions/currency.action";
   templateUrl: './currency-list.component.html',
   styleUrls: ['./currency-list.component.css']
 })
-export class CurrencyListComponent implements OnInit {
+export class CurrencyListComponent implements OnDestroy {
   currencies$: Observable<Currency[]>;
+  intervalDataId: number;
+  currentTime: string;
 
   constructor(private store: Store<AppState>) {
-    console.log("kek");
     this.currencies$ = this.store.select(selectCurrencies).pipe(
-      tap(value => console.log(value)),
       map(currencies => currencies.filter(currency => currency.selected))
     );
+
+    this.currentTime = new Date().toLocaleString();
+
+    this.intervalDataId = setInterval(() => {
+      this.currentTime = new Date().toLocaleString();
+    }, 1000);
   }
 
-  ngOnInit() {
-    this.store.dispatch(loadCurrenciesRequested());
+  ngOnDestroy() {
+    clearInterval(this.intervalDataId);
   }
 }

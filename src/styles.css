@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+/* Общие стили для главного контента */
+.main {
+  margin: 40px 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Стили для компонента app-currency-add */
+.p-inputgroup {
+  display: flex;
+  align-items: center;
+  max-width: 50%;
+  margin: 5px auto;
+}
+
+.p-dropdown {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.p-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  height: auto;
+  line-height: 1.5;
+}
+
+.p-button:hover {
+  background-color: #0056b3;
+}
+
+/* Стили для компонента app-currency-list */
+.currency-list {
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  font-family: Monaco, "Lucida Console", monospace
+}
+
+.currency-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.currency-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.currency-list li:last-child {
+  border-bottom: none;
+}
+
+/* Стили для футера */
+footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    font-size: 18px;
+  }
+
+  .p-inputgroup {
+    font-size: 14px;
+  }
+
+  .p-dropdown {
+    margin-right: 5px;
+  }
+
+  .p-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .currency-list {
+    padding: 15px;
+  }
+
+  .currency-list p {
+    font-size: 14px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
+}
