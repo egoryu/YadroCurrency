@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import { of } from 'rxjs';
 import {CurrencyService} from "../../services/currecy/currency-service.service";
 import {loadCurrenciesFailed, loadCurrenciesRequested, loadCurrenciesSucceeded} from "../actions/currency.action";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({ providedIn: 'root' })
 export class CurrencyEffects {
@@ -13,7 +14,7 @@ export class CurrencyEffects {
       switchMap(() =>
         this.currencyService.getRates().pipe(
           map(quotes => loadCurrenciesSucceeded({ quotes })),
-          catchError(error => of(loadCurrenciesFailed({ error })))
+          catchError((error: HttpErrorResponse) => of(loadCurrenciesFailed({ error })))
         )
       )
     )
