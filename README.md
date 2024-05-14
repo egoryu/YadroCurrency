@@ -1,27 +1,39 @@
 # YadroCurrency
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+## Задание
 
-## Development server
+Необходимо разработать web приложение, которое
+будет отображать курсы валют к рублю.
+Изначально показываются 3 валюты (USD, EUR, GBR),
+через иконку "+" можно добавить еще 3 (CNY, JPY,
+TRY).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Обновление данных происходит каждые 5 секунд, в
+скобочках показывается разница между предыдущим
+и текущим значениями.
 
-## Code scaffolding
+Можно использовать API
+https://api.apilayer.com/currency_data/live и любой
+другой аналогичный.
+Описание api:
+https://apilayer.com/marketplace/currency_data-api
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Также:
+- Обязательно использовать Angular актуальной версии;
+- Для удобства готовое задание лучше выложить на Github Pages, Codesandbox или
+другое публичное пространство;
+- Можно использовать дополнительные библиотеки,
+например UI kit или state manager;
+- Плюсом будет адаптивная вёрстка, чистый код, настроенный линтер, юнит тесты
+или что-то еще сверх поставленной задачи;
 
-## Build
+## Дополнение
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+В работе использовался Angular 17, state manager NgRx, линтер ESLint, Husky и PrimeNg.
 
-## Running unit tests
+Для тестирования приложения были написаны юнит-тесты для currencyReducer, currencyEffect, currencyService и currencyPipe.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Из-за ограничения в 100 бесплатных запросов в месяц на API https://api.apilayer.com,
+обновление данных о курсах валют происходит раз в минуту.
+В случае превышения лимита запросов и получения ошибки о конце тарифа,
+приложение автоматически генерирует случайные значения для курсов валют.

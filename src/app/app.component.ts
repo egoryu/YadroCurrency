@@ -15,7 +15,7 @@ export class AppComponent implements OnDestroy {
   constructor(private store: Store<AppState>) {
     this.intervalRequestId = setInterval(() => {
       this.store.dispatch(loadCurrenciesRequested());
-    }, 1000);
+    }, 60 * 1000);
   }
 
   ngOnDestroy() {
